@@ -8,13 +8,13 @@
 
 - **Python**: >= 3.10
 - **CUDA**: GPU environment with CUDA support
-- **Hardware**: Multi-GPU setup recommended for faster evaluation
+- **Hardware**: Single A100 GPU setup since I just rent one GPU for reimplementation
 
 **Main Dependencies**:
-- PyTorch 2.5.1
-- Transformers 4.52.0
-- Ray 2.43.0
-- vLLM 0.7.3
+- PyTorch 2.9.0 (we use higher version instead of 2.5.1)
+- Transformers 4.57.3 (low versions do not support Qwen3 series)
+- Ray 2.53.0 (we use higher version instead of 2.43.0)
+- vLLM 0.13.0 (0.7.3 do not support Qwen3 CausalLM)
 
 ### Step 1: Prepare Evaluation Data
 
