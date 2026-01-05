@@ -1,11 +1,29 @@
+# #!/bin/bash
+
+# # Set common variables
+# MODEL_PATH=$1
+# VERSION="${VERSION:-v1.0}"
+# BASE_OUTPUT_DIR="${BENCHMARK_BASE_DIR}/results/${VERSION}/results_${2}"
+# BASE_LOG_NAME="${BENCHMARK_BASE_DIR}/auto_eval_logs/${VERSION}/$2"
+# ENABLE_THINKING=$3
+
 #!/bin/bash
 
-# Set common variables
-MODEL_PATH=$1
+# 从环境变量读取参数，替代原来的位置参数
+MODEL_PATH="${MODEL_PATH}"
+RESULT_NAME="${RESULT_NAME}"
+ENABLE_THINKING="${ENABLE_THINKING}"
 VERSION="${VERSION:-v1.0}"
-BASE_OUTPUT_DIR="${BENCHMARK_BASE_DIR}/results/${VERSION}/results_${2}"
-BASE_LOG_NAME="${BENCHMARK_BASE_DIR}/auto_eval_logs/${VERSION}/$2"
-ENABLE_THINKING=$3
+
+# 后续路径拼接逻辑也需要对应修改（把 $2 换成 $RESULT_NAME）
+BASE_OUTPUT_DIR="${BENCHMARK_BASE_DIR}/results/${VERSION}/results_${RESULT_NAME}"
+BASE_LOG_NAME="${BENCHMARK_BASE_DIR}/auto_eval_logs/${VERSION}/${RESULT_NAME}"
+
+# 可选：增加环境变量为空的校验
+if [ -z "$MODEL_PATH" ] || [ -z "$RESULT_NAME" ]; then
+    echo "错误：MODEL_PATH 或 RESULT_NAME 环境变量未设置"
+    exit 1
+fi
 
 # Read configuration from environment variables (set by eval_script.py)
 # Fallback to hardcoded paths if not set
